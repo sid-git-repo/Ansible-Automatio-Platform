@@ -1,0 +1,8 @@
+---
+- name: Create Linux users
+  user:
+    name: "{{ item.name }}"
+    groups: "{{ item.groups | default('') }}"
+    shell: /bin/bash
+    state: present
+  loop: "{{ linux_users }}"

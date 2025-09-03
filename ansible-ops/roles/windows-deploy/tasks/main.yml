@@ -1,0 +1,11 @@
+---
+- name: Copy application files to Windows
+  win_copy:
+    src: "{{ windows_artifact }}"
+    dest: "C:\\apps\\{{ app_name }}\\"
+
+- name: Unzip artifact if needed
+  win_unzip:
+    src: "C:\\apps\\{{ app_name }}\\{{ windows_artifact | basename }}"
+    dest: "C:\\apps\\{{ app_name }}\\"
+  when: windows_artifact.endswith('.zip')

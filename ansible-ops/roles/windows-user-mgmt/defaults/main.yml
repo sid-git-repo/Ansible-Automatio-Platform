@@ -1,0 +1,4 @@
+---
+windows_users:
+  - name: appadmin
+    password: "ChangeMe123!"

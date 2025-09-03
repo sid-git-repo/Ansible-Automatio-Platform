@@ -1,0 +1,23 @@
+---
+- name: Cross-Platform Application Management
+  hosts: app_servers
+  gather_facts: yes
+
+  vars_files:
+    - "{{ app_vars }}"
+
+  tasks:
+    - name: Debug OS type
+      debug:
+        msg: "Running on {{ ansible_os_family }}"
+
+  roles:
+    # Linux roles
+    - { role: linux-user-mgmt, when: ansible_os_family in ['RedHat', 'Debian'] }
+    - { role: linux-service-mgmt, when: ansible_os_family in ['RedHat', 'Debian'] }
+
+    # Windows roles
+    - { role: windows-user-mgmt, when: ansible_os_family == 'Windows' }
+    - { role: windows-service-mgmt, when: ansible_os_family == 'Windows' }
+    - { role: windows-patching, when: ansible_os_family == 'Windows' }
+    - { role: windows-deploy, when: ansible_os_family == 'Windows' }

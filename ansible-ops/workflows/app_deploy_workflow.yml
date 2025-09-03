@@ -1,0 +1,15 @@
+---
+- name: Application_Deployment_Workflow
+  description: "Workflow for Deploy -> Restart -> Health Check"
+  organization: Default
+  schema:
+    - job_template: Deploy_Application
+      identifier: deploy_app
+      success_nodes:
+        - restart_app
+    - job_template: Restart_Application
+      identifier: restart_app
+      success_nodes:
+        - health_check
+    - job_template: Health_Check
+      identifier: health_check

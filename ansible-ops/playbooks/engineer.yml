@@ -1,0 +1,14 @@
+---
+- name: Engineer Playbook - Limited Role Access
+  hosts: app_servers
+  gather_facts: yes
+
+  vars_files:
+    - "{{ app_vars }}"
+
+  roles:
+    - role: common
+    - role: app-deploy
+    - role: app-restart
+    - role: logs-collect
+    - role: db-ops
