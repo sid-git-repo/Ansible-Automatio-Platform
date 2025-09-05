@@ -1,5 +1,0 @@
----
-healthcheck_url: "http://localhost:8080/health"
-db_host: ""
-db_user: ""
-db_password: ""

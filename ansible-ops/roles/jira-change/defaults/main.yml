@@ -1,5 +1,0 @@
----
-jira_url: "https://yourcompany.atlassian.net"
-jira_user: "automation@yourcompany.com"
-jira_password: "apitoken"
-jira_project: "OPS"

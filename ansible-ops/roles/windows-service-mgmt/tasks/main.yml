@@ -1,5 +1,0 @@
----
-- name: Ensure Windows service is running
-  win_service:
-    name: "{{ windows_service }}"
-    state: started

@@ -1,7 +1,0 @@
----
-- name: Create Windows users
-  win_user:
-    name: "{{ item.name }}"
-    password: "{{ item.password }}"
-    state: present
-  loop: "{{ windows_users }}"

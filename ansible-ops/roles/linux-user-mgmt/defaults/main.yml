@@ -1,4 +1,0 @@
----
-linux_users:
-  - name: appadmin
-    groups: wheel

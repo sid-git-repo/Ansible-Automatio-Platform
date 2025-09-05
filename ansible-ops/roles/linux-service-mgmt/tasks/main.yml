@@ -1,6 +1,0 @@
----
-- name: Ensure Linux service is running
-  systemd:
-    name: "{{ linux_service }}"
-    state: started
-    enabled: yes
