@@ -1,0 +1,7 @@
+
+skip_list:
+  - yaml
+warn_list:
+  - fqcn
+  - no-changed-when
+  - name[missing]

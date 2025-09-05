@@ -1,0 +1,7 @@
+---
+env: stage
+app_name: runops
+greeting: "Hello from stage!"
+ntp_server: "time.stage.local"
+dns_servers: ['1.1.1.1', '1.0.0.1']
+env_message: "Staging environment"

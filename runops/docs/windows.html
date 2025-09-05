@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Role: windows</title>
+<link rel="stylesheet" href="styles.css">
+<body>
+  <div class="container">
+    
+<nav>
+  <a href="index.html">Home</a>
+  <a href="common.html">Common</a>
+  <a href="linux.html">Linux</a>
+  <a href="windows.html">Windows</a>
+  <a href="cheatsheet.html">Cheat Sheet</a>
+  <a href="../website/index.html">Brand Site</a>
+</nav>
+    <div class="search">
+      <input id="search-input" type="search" placeholder="Search docs..." aria-label="Search docs"/>
+    </div>
+    <div id="search-results" class="results"></div>
+
+
+    
+<div class="searchbox">
+  <input type="text" id="searchInput" placeholder="Search this page...">
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("searchInput");
+  input.addEventListener("input", () => {
+    const q = input.value.toLowerCase();
+    const paras = document.querySelectorAll("p, li, h1, h2, h3, pre");
+    paras.forEach(el => {
+      el.innerHTML = el.textContent;
+      if(q && el.textContent.toLowerCase().includes(q)){
+        const regex = new RegExp("(" + q + ")", "gi");
+        el.innerHTML = el.textContent.replace(regex, '<span class="highlight">$1</span>');
+      }
+    });
+  });
+});
+</script>
+
+<div class="card">
+      <h1>Role: windows</h1>
+      <h1>Role: windows</h1>
+
+<p>The `windows` role is applied to hosts in the `windows` group.</p>
+
+<h2>Features</h2>
+<ul>
+<li>Ensures Notepad++ is installed via Chocolatey (`win_chocolatey` module).</li>
+</ul>
+
+<h2>Requirements</h2>
+<ul>
+<li>WinRM must be enabled and accessible from the Ansible controller.</li>
+<ul>
+<li>Chocolatey should be present (installer will run if missing).</li>
+</ul>
+
+<h2>Usage</h2>
+<p>Automatically included in `playbooks/site.yml` for the `windows` group:</p>
+<pre><code>
+- name: Site - windows baseline
+  hosts: windows
+  roles:
+    - role: windows
+</code></pre>
+    
+    <div class="card">
+      <h3>Downloads</h3>
+      <ul>
+        <li><a href="../documents/runops-role-docs-with-diagram.pdf">Role Guide (PDF)</a></li>
+        <li><a href="../documents/runops-role-docs-with-diagram.pptx">Role Guide (Slides)</a></li>
+        <li><a href="../documents/runops-cheatsheet.pdf">Quick Reference Cheat Sheet (PDF)</a></li>
+      </ul>
+    </div>
+
+    <footer>© RunOps • Docs</footer>
+  </div>
+<script src="search.js"></script>
+</body>
+</html>

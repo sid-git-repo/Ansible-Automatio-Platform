@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RunOps • Docs</title>
+<link rel="icon" href="assets/logo-runops.svg">
+<link rel="stylesheet" href="assets/styles.css">
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <img src="assets/logo-runops.svg" alt="RunOps logo">
+        <strong>RunOps</strong>
+      </div>
+      <div><a href="index.html">Home</a><a href="quickstart.html">Quickstart</a><a href="docs.html">Docs</a></div>
+    </div>
+    <h1 class="hxl">Documentation</h1>
+    <div class="card">
+      <h3>Structure</h3>
+      <ul>
+        <li><code>inventories/</code>: env hosts + vars</li>
+        <li><code>roles/</code>: common, linux, windows</li>
+        <li><code>playbooks/</code>: site & ping</li>
+        <li><code>scripts/</code>: CLI</li>
+        <li><code>.github/workflows/</code> & <code>Jenkinsfile</code>: CI</li>
+        <li><code>roles/common/molecule/</code>: tests</li>
+        <li><code>.devcontainer/</code>: VS Code environment</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Variables</h3>
+      <pre><code>ntp_server: "time.dev.local"
+dns_servers: ["8.8.8.8", "8.8.4.4"]
+app_name: runops
+</code></pre>
+    </div>
+  </div>
+</body>
+</html>

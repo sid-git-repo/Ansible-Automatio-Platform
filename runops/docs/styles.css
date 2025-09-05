@@ -1,0 +1,15 @@
+:root{--bg:#0b1020;--fg:#e6eefc;--muted:#9fb3c8;--card:#111831;--link:#7aa2ff;}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial;color:var(--fg);background:var(--bg)}
+.container{max-width:960px;margin:0 auto;padding:28px 16px}
+nav a{color:var(--fg);text-decoration:none;margin-right:12px;opacity:.9}
+.card{background:var(--card);border:1px solid #1c2445;border-radius:14px;padding:18px;margin:16px 0}
+a{color:var(--link)}
+pre{background:#0d1326;border:1px solid #1c2445;border-radius:10px;padding:12px;overflow:auto}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace}
+h1,h2,h3{margin:14px 0 6px}
+footer{margin:28px 0 0;color:#7d8fb3;font-size:13px;text-align:center}
+
+.searchbox {margin:20px 0;}
+.searchbox input{width:100%;padding:10px;border-radius:8px;border:1px solid #444;background:#0d1326;color:#e6eefc;}
+.highlight{background:yellow;color:black;}

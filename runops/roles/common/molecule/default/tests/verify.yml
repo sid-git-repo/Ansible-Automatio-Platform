@@ -1,0 +1,51 @@
+
+---
+- name: Verify NTP and DNS configuration on Linux
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ensure chrony.conf exists
+      ansible.builtin.stat:
+        path: /etc/chrony/chrony.conf
+      register: chrony_stat
+
+    - name: Assert chrony.conf present
+      ansible.builtin.assert:
+        that:
+          - chrony_stat.stat.exists
+        fail_msg: "chrony.conf not found"
+
+    - name: Read chrony.conf
+      ansible.builtin.slurp:
+        path: /etc/chrony/chrony.conf
+      register: chrony_file
+
+    - name: Validate chrony.conf contains ntp_server
+      ansible.builtin.assert:
+        that:
+          - (chrony_file.content | b64decode).find('pool ' ~ ntp_server) != -1
+        fail_msg: "chrony.conf does not contain the expected NTP pool '{{ ntp_server }}'"
+
+    - name: Ensure resolv.conf exists
+      ansible.builtin.stat:
+        path: /etc/resolv.conf
+      register: resolv_stat
+
+    - name: Assert resolv.conf present
+      ansible.builtin.assert:
+        that:
+          - resolv_stat.stat.exists
+        fail_msg: "/etc/resolv.conf not found"
+
+    - name: Read resolv.conf
+      ansible.builtin.slurp:
+        path: /etc/resolv.conf
+      register: resolv_file
+
+    - name: Validate resolv.conf contains all DNS servers
+      ansible.builtin.assert:
+        that:
+{% raw %}
+          - {% endraw %}{% for ns in dns_servers %}(resolv_file.content | b64decode).find('nameserver {{ ns }}') != -1{% if not loop.last %} and{% endif %}
+            {% endfor %}
+        fail_msg: "/etc/resolv.conf is missing one or more expected DNS servers: {{ dns_servers | join(', ') }}"

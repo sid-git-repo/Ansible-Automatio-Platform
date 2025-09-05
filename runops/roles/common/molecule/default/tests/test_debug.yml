@@ -1,0 +1,10 @@
+
+---
+- name: Verify debug output
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Assert greeting is defined
+      ansible.builtin.assert:
+        that:
+          - greeting is defined

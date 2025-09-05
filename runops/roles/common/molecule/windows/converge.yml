@@ -1,0 +1,7 @@
+
+---
+- name: Converge (Windows)
+  hosts: windows
+  gather_facts: true
+  roles:
+    - role: common

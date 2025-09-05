@@ -1,0 +1,23 @@
+
+---
+- name: Verify Windows NTP and DNS settings
+  hosts: windows
+  gather_facts: false
+  tasks:
+    - name: Run w32tm query
+      ansible.windows.win_shell: w32tm /query /status
+      register: w32tm_status
+
+    - name: Assert NTP server is configured
+      ansible.builtin.assert:
+        that:
+          - "'{{ ntp_server }}' in w32tm_status.stdout"
+
+    - name: Check DNS servers
+      ansible.windows.win_shell: Get-DnsClientServerAddress -AddressFamily IPv4 | ConvertTo-Json
+      register: dns_config
+
+    - name: Assert DNS servers are applied
+      ansible.builtin.assert:
+        that:
+          - dns_servers | length > 0

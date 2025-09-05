@@ -1,0 +1,7 @@
+---
+env: prod
+app_name: runops
+greeting: "Hello from prod!"
+ntp_server: "time.prod.local"
+dns_servers: ['9.9.9.9', '149.112.112.112']
+env_message: "Production environment"

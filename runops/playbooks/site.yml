@@ -1,0 +1,25 @@
+
+---
+# Common baseline applied to all hosts
+- name: Site - common baseline
+  hosts: all
+  gather_facts: true
+  roles:
+    - role: common
+      tags: [common]
+
+# Linux-specific configuration
+- name: Site - linux baseline
+  hosts: linux
+  gather_facts: true
+  roles:
+    - role: linux
+      tags: [linux]
+
+# Windows-specific configuration
+- name: Site - windows baseline
+  hosts: windows
+  gather_facts: true
+  roles:
+    - role: windows
+      tags: [windows]

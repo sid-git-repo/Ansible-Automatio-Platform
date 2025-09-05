@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RunOps Docs</title>
+<link rel="stylesheet" href="styles.css">
+<body>
+  <div class="container">
+    
+<nav>
+  <a href="index.html">Home</a>
+  <a href="common.html">Common</a>
+  <a href="linux.html">Linux</a>
+  <a href="windows.html">Windows</a>
+  <a href="cheatsheet.html">Cheat Sheet</a>
+  <a href="../website/index.html">Brand Site</a>
+</nav>
+    <div class="search">
+      <input id="search-input" type="search" placeholder="Search docs..." aria-label="Search docs"/>
+    </div>
+    <div id="search-results" class="results"></div>
+
+
+    
+<div class="searchbox">
+  <input type="text" id="searchInput" placeholder="Search this page...">
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("searchInput");
+  input.addEventListener("input", () => {
+    const q = input.value.toLowerCase();
+    const paras = document.querySelectorAll("p, li, h1, h2, h3, pre");
+    paras.forEach(el => {
+      el.innerHTML = el.textContent;
+      if(q && el.textContent.toLowerCase().includes(q)){
+        const regex = new RegExp("(" + q + ")", "gi");
+        el.innerHTML = el.textContent.replace(regex, '<span class="highlight">$1</span>');
+      }
+    });
+  });
+});
+</script>
+
+<div class="card">
+      <h1>RunOps Docs</h1>
+      <h1>RunOps Role Documentation</h1>
+
+<p>This folder documents how to use each role in the RunOps framework.</p>
+
+<h2>Roles</h2>
+<ul>
+<li>[common.md](common.md) — Baseline cross-platform config (NTP, DNS, greetings).</li>
+<ul>
+<li>[linux.md](linux.md) — Linux-specific baseline (packages).</li>
+<ul>
+<li>[windows.md](windows.md) — Windows-specific baseline (Notepad++ via Chocolatey).</li>
+</ul>
+
+<h2>Usage Pattern</h2>
+<ul>
+<li>The roles are already wired into `playbooks/site.yml`.</li>
+<ul>
+<li>You just need to target the correct inventory (`dev`, `stage`, `prod`).</li>
+<ul>
+<li>Each role can be extended with additional tasks.</li>
+</ul>
+
+<h2>Example Run</h2>
+<pre><code>
+python scripts/cli.py run playbook -p playbooks/site.yml -i inventories/dev/hosts.yml
+</code></pre>
+    
+<div class="card">
+  <h2>Downloads</h2>
+  <ul>
+    <li><a href="../documents/runops-role-docs-with-diagram.pdf">📄 Full Role Docs (PDF)</a></li>
+    <li><a href="../documents/runops-role-docs-with-diagram.pptx">📊 Slides (PPTX)</a></li>
+    <li><a href="../documents/runops-cheatsheet.pdf">⚡ Quick Reference (PDF)</a></li>
+  </ul>
+</div>
+
+    </div>
+    <footer>© RunOps • Docs</footer>
+  </div>
+<script src="search.js"></script>
+</body>
+</html>

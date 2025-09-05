@@ -1,0 +1,8 @@
+
+# Managed by Ansible (roles/common/templates/resolv.conf.j2)
+# Environment: {{ env | default('unknown') }}
+{% for ns in dns_servers | default([]) %}
+nameserver {{ ns }}
+{% endfor %}
+search local
+options timeout:2 attempts:2

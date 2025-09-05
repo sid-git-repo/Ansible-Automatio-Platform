@@ -1,0 +1,29 @@
+
+---
+- name: Verify NTP and DNS configuration on Linux
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Check chrony.conf exists
+      ansible.builtin.stat:
+        path: /etc/chrony/chrony.conf
+      register: chrony_conf
+      when: ansible_system == "Linux"
+
+    - name: Assert chrony.conf was deployed
+      ansible.builtin.assert:
+        that:
+          - chrony_conf.stat.exists
+      when: ansible_system == "Linux"
+
+    - name: Check resolv.conf exists
+      ansible.builtin.stat:
+        path: /etc/resolv.conf
+      register: resolv_conf
+      when: ansible_system == "Linux"
+
+    - name: Assert resolv.conf was deployed
+      ansible.builtin.assert:
+        that:
+          - resolv_conf.stat.exists
+      when: ansible_system == "Linux"

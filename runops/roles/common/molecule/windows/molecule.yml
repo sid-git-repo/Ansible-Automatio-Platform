@@ -1,0 +1,24 @@
+
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: delegated
+  options:
+    managed: false  # You're responsible for providing the Windows host
+
+platforms:
+  - name: windows-host
+    groups:
+      - windows
+
+provisioner:
+  name: ansible
+  inventory:
+    host_vars: {}
+  playbooks:
+    converge: converge.yml
+
+verifier:
+  name: ansible

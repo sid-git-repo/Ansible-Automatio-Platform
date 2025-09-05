@@ -1,0 +1,61 @@
+
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      run_windows_scenario:
+        description: "Run Windows delegated Molecule scenario"
+        required: false
+        default: "false"
+      windows_inventory_path:
+        description: "Path to inventory file checked into repo or provided at runtime"
+        required: false
+        default: ""
+
+jobs:
+  linux:
+    name: Linux Molecule (default)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: |
+          python -m venv .venv
+          . .venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+      - name: Lint
+        run: . .venv/bin/activate && make lint
+      - name: Molecule (Docker, default scenario)
+        run: |
+          . .venv/bin/activate
+          cd roles/common && molecule test
+
+  windows:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_windows_scenario == 'true' }}
+    name: Windows Molecule (delegated)
+    runs-on: ubuntu-latest
+    env:
+      MOLECULE_INVENTORY_FILE: ${{ inputs.windows_inventory_path }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: |
+          python -m venv .venv
+          . .venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+      - name: Run Windows delegated scenario (requires reachable Windows host via WinRM)
+        run: |
+          . .venv/bin/activate
+          test -n "$MOLECULE_INVENTORY_FILE" || (echo "MOLECULE_INVENTORY_FILE not set" && exit 1)
+          cd roles/common && molecule test -s windows

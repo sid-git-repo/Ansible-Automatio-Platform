@@ -1,0 +1,10 @@
+
+---
+- name: Install basic packages (Linux)
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - curl
+    - vim
+    - git

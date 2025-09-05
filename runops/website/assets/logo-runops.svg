@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="28" fill="url(#g)"/>
+  <g fill="#fff" transform="translate(40,48)">
+    <path d="M60 0h40a40 40 0 1 1 0 80H76l-16 24H36l16-24H40A40 40 0 1 1 60 0Zm16 16H60a24 24 0 1 0 0 48h16V16Zm16 0v48h8a24 24 0 1 0 0-48h-8Z" opacity="0.9"/>
+    <text x="80" y="150" text-anchor="middle" font-size="28" font-family="ui-sans-serif, system-ui" font-weight="700">RunOps</text>
+  </g>
+</svg>

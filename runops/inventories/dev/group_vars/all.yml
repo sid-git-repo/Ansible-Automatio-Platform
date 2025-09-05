@@ -1,0 +1,7 @@
+---
+env: dev
+app_name: runops
+greeting: "Hello from dev!"
+ntp_server: "time.dev.local"
+dns_servers: ['8.8.8.8', '8.8.4.4']
+env_message: "Development environment"

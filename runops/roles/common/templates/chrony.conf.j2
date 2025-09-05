@@ -1,0 +1,10 @@
+
+# Managed by Ansible (roles/common/templates/chrony.conf.j2)
+# Environment: {{ env | default('unknown') }}
+pool {{ ntp_server }} iburst
+driftfile /var/lib/chrony/chrony.drift
+makestep 1.0 3
+rtcsync
+keyfile /etc/chrony/chrony.keys
+leapsectz right/UTC
+logdir /var/log/chrony

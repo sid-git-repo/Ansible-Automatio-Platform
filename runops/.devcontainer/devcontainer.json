@@ -1,0 +1,37 @@
+{
+  "name": "Ansible + Python Automation",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "workspaceFolder": "/workspaces/project",
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "redhat.ansible",
+        "ms-azuretools.vscode-docker",
+        "EditorConfig.EditorConfig",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": true,
+        "ansible.ansible.path": "ansible",
+        "ansible.ansibleLint.path": "ansible-lint",
+        "ansible.python.interpreterPath": "/usr/local/bin/python"
+      }
+    }
+  },
+  "postCreateCommand": "python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt -r requirements-dev.txt && pre-commit install",
+  "remoteUser": "vscode",
+  "runArgs": [
+    "--init",
+    "--privileged"
+  ]
+}

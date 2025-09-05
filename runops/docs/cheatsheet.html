@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Reference Cheat Sheet</title>
+<link rel="stylesheet" href="styles.css">
+<body>
+  <div class="container">
+    
+<nav>
+  <a href="index.html">Home</a>
+  <a href="common.html">Common</a>
+  <a href="linux.html">Linux</a>
+  <a href="windows.html">Windows</a>
+  <a href="cheatsheet.html">Cheat Sheet</a>
+  <a href="../website/index.html">Brand Site</a>
+</nav>
+    <div class="search">
+      <input id="search-input" type="search" placeholder="Search docs..." aria-label="Search docs"/>
+    </div>
+    <div id="search-results" class="results"></div>
+
+
+    
+<div class="searchbox">
+  <input type="text" id="searchInput" placeholder="Search this page...">
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("searchInput");
+  input.addEventListener("input", () => {
+    const q = input.value.toLowerCase();
+    const paras = document.querySelectorAll("p, li, h1, h2, h3, pre");
+    paras.forEach(el => {
+      el.innerHTML = el.textContent;
+      if(q && el.textContent.toLowerCase().includes(q)){
+        const regex = new RegExp("(" + q + ")", "gi");
+        el.innerHTML = el.textContent.replace(regex, '<span class="highlight">$1</span>');
+      }
+    });
+  });
+});
+</script>
+
+<div class="card">
+      <h1>Quick Reference Cheat Sheet</h1>
+      <h1>RunOps – Quick Reference Cheat Sheet</h1>
+
+<h2>Setup</h2>
+<pre><code>
+# Create venv &amp; install deps
+python -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -r requirements.txt -r requirements-dev.txt
+
+# Install pre-commit hooks
+pre-commit install
+</code></pre>
+
+<h2>Run Playbooks</h2>
+<pre><code>
+# Run site.yml against dev inventory
+python scripts/cli.py run playbook -p playbooks/site.yml -i inventories/dev/hosts.yml
+
+# Ping all hosts in stage
+python scripts/cli.py run ping --inventory inventories/stage/hosts.yml
+</code></pre>
+
+<h2>Molecule Tests</h2>
+<pre><code>
+# Test common role (Linux, Docker)
+cd roles/common &amp;&amp; molecule test
+
+# Run Windows delegated scenario
+MOLECULE_INVENTORY_FILE=inventory.yml molecule test -s windows
+</code></pre>
+
+<h2>Linting</h2>
+<pre><code>
+# Run all linters (YAML + Ansible + Python)
+make lint
+</code></pre>
+
+<h2>CI/CD</h2>
+<pre><code>
+# GitHub Actions: Linux scenario auto-runs on push/PR
+# Trigger Windows scenario manually:
+workflow_dispatch: run_windows_scenario=true
+</code></pre>
+    
+    <div class="card">
+      <h3>Downloads</h3>
+      <ul>
+        <li><a href="../documents/runops-role-docs-with-diagram.pdf">Role Guide (PDF)</a></li>
+        <li><a href="../documents/runops-role-docs-with-diagram.pptx">Role Guide (Slides)</a></li>
+        <li><a href="../documents/runops-cheatsheet.pdf">Quick Reference Cheat Sheet (PDF)</a></li>
+      </ul>
+    </div>
+
+    <footer>© RunOps • Docs</footer>
+  </div>
+<script src="search.js"></script>
+</body>
+</html>

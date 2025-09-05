@@ -1,0 +1,14 @@
+
+- Getting Started
+  - [Introduction](README.md)
+  - [Quick Start](quickstart.md)
+- Usage
+  - [Inventories](inventories.md)
+  - [Roles](roles.md)
+  - [Playbooks](playbooks.md)
+- CI/CD
+  - [GitHub Actions](ci.md)
+  - [Jenkins](jenkins.md)
+- Advanced
+  - [Molecule Testing](molecule.md)
+  - [Custom Plugins](plugins.md)
